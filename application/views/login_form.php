@@ -30,6 +30,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <button type="submit" name="submit" class="btn btn-primary">Login in</button>
             </div>
         </form>
+
+        <?php foreach ($users as $users_item) : ?>
+
+            <h3><?php echo $users_item['email']; ?></h3>
+            <div class="main">
+                <?php echo $users_item['password']; ?>
+            </div>
+        <?php endforeach; ?>
     </div>
 
 </body>
