@@ -6,12 +6,6 @@ class Login_model extends CI_Model
         $this->load->database();
     }
 
-    public function get_users()
-    {
-        $query = $this->db->get('users');
-        return $query->result_array();
-    }
-
     public function login($email, $password)
     {
         $this->db->where('email', $email);

@@ -15,9 +15,7 @@ class Login extends CI_Controller
 
     public function index()
     {
-        $data['users'] = $this->login_model->get_users();
-
-        $this->load->view('login_form', $data);
+        $this->load->view('login_form');
     }
 
     public function do_login()
