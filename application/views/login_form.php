@@ -17,27 +17,22 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <div class="container">
         <h1>This is the login</h1>
 
-        <form class="col g-3">
-            <div class="col-xl-6">
-                <label for="inputEmail4" class="form-label">Email</label>
-                <input type="email" name="email" class="form-control" id="inputEmail4">
-            </div>
-            <div class="col-md-6">
-                <label for="inputPassword4" class="form-label">Password</label>
-                <input type="password" class="password" class="form-control" id="inputPassword4">
-            </div>
-            <div class="col-3">
-                <button type="submit" name="submit" class="btn btn-primary">Login in</button>
-            </div>
-        </form>
-
-        <?php foreach ($users as $users_item) : ?>
-
-            <h3><?php echo $users_item['email']; ?></h3>
-            <div class="main">
-                <?php echo $users_item['password']; ?>
-            </div>
-        <?php endforeach; ?>
+        <?php echo form_open('login/do_login'); ?>
+        <div class="col-xl-6">
+            <label for="inputEmail4" class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" id="inputEmail4">
+        </div>
+        <div class="col-md-6">
+            <label for="inputPassword4" class="form-label">Password</label>
+            <input type="password" name="password" class="password" class="form-control" id="inputPassword4">
+        </div>
+        <div class="col-3">
+            <button type="submit" name="submit" class="btn btn-primary">Login in</button>
+        </div>
+        <?php echo form_close(); ?>
+        <?php if (isset($error_message)) {
+            echo $error_message;
+        } ?>
     </div>
 
 </body>
