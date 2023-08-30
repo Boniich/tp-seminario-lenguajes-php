@@ -4,6 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Register extends CI_Controller
 {
 
+
     public function __construct()
     {
         parent::__construct();
@@ -17,19 +18,37 @@ class Register extends CI_Controller
         $this->load->view('register_index');
     }
 
-    public function do_register()
+    private function get_fields_empty_error()
+    {
+        $data['error_message'] = 'One or more Required field are empty!';
+        $this->load->view('register_index', $data);
+        return false;
+    }
+
+    private function take_register_data()
     {
         $email = $this->input->post('email');
         $password = $this->input->post('password');
 
+
         if ($email == '' || $password == '') {
-            $data['error_message'] = 'One or more Required field is empty!';
-            $this->load->view('register_index', $data);
-        } else if ($this->register_model->register($email, $password)) {
-            redirect('dashboard');
+            $this->get_fields_empty_error();
         } else {
-            $data['error_message'] = 'Ups! something go wrong! Try again!';
-            $this->load->view('register_index', $data);
+            $userData = array(
+                'email' => $email,
+                'password' => $password
+            );
+            return $userData;
+        }
+    }
+
+    public function do_register()
+    {
+        $userData = $this->take_register_data();
+        if ($userData) {
+            if ($this->register_model->register($userData)) {
+                redirect('dashboard');
+            }
         }
     }
 }

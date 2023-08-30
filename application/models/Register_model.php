@@ -6,19 +6,9 @@ class Register_model extends CI_Model
         $this->load->database();
     }
 
-    public function register($email, $password)
+    public function register($data)
     {
-        try {
-            $data = array(
-                'email' => $email,
-                'password' => $password
-            );
-
-            $this->db->insert('users', $data);
-
-            return true;
-        } catch (\Throwable $th) {
-            return false;
-        }
+        $this->db->insert('users', $data);
+        return true;
     }
 }
