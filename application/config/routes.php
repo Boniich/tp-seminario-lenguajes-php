@@ -50,6 +50,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'login';
+$route['register'] = 'register';
 $route['dashboard'] = 'dashboard'; // para acceder debemos usar la siguiente URL http://localhost/seminarioLenguajesphp/index.php/dashboard
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
