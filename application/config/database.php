@@ -78,6 +78,7 @@ $db['default'] = array(
 	'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => '',
+	'port' => 3308,
 	'database' => 'db_seminario_lenguajes_php',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

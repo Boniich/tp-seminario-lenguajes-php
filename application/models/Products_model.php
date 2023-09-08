@@ -12,4 +12,10 @@ class Products_model extends CI_Model
         $result = $query->result_array();
         return $result;
     }
+
+    public function store_new_product($data){
+        $this->db->insert('products',$data);
+
+        return true;
+    }
 }
