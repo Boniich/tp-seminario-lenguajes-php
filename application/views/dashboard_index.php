@@ -17,6 +17,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <div class="container">
         <h1>This is the dashboard</h1>
 
+        <?php foreach ($products as $product) : ?>
+
+
+            <div>
+                <p>Name: <?php echo $product['name']; ?> </p>
+                <p>Description: <?php echo $product['description']; ?></p>
+                <p>Price: <?php echo $product['price']; ?></p>
+            </div>
+        <?php endforeach; ?>
+
 </body>
 
 </html>
