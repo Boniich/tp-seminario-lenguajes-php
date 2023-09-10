@@ -35,6 +35,11 @@ class Dashboard extends CI_Controller
         return $productData;
     }
 
+    public function show_create_product_form()
+    {
+        $this->load->view('create_product_form');
+    }
+
 
     public function store_product()
     {
@@ -54,10 +59,11 @@ class Dashboard extends CI_Controller
 
     public function update_product()
     {
+        $id = $this->input->post('id');
         $product = $this->take_product_data();
 
         if ($product) {
-            $this->products_model->update_one_product($product);
+            $this->products_model->update_one_product($product, $id);
             redirect('dashboard');
         }
     }

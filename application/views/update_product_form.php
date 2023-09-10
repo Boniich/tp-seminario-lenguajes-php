@@ -24,7 +24,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">inicio</a>
+                            <a class="nav-link active" aria-current="page" href="<?php echo site_url("dashboard"); ?>">Dashboard</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Sobre mi</a>
@@ -43,19 +43,22 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
         <?php foreach ($product as $product) : ?>
 
-            <?php echo form_open('dashboard/update_product'); ?>
+
+            <?php
+            $hidden = array('id' => $product['id']);
+            echo form_open("dashboard/update_product", '', $hidden); ?>
             <h2>Update product #<?php echo $product['id']; ?></h2>
             <div class="col-xl-6">
                 <label for="inputEmail4" class="form-label">name</label>
-                <input type="text" name="name" class="form-control" id="inputEmail4" value=<?php echo $product['name']; ?>>
+                <input type="text" name="name" class="form-control" value="<?php echo $product['name']; ?>">
             </div>
             <div class="col-md-6">
                 <label for="inputPassword4" class="form-label">description</label>
-                <input type="text" name="description" class="password" class="form-control" id="inputPassword4" value=<?php echo $product['description'] ?>>
+                <input type="text" name="description" class="form-control" value="<?php echo $product['description'] ?>">
             </div>
             <div class="col-md-6">
                 <label for="inputPassword4" class="form-label">price</label>
-                <input type="number" name="price" class="password" class="form-control" id="inputPassword4" value=<?php echo $product['price'] ?>>
+                <input type="number" name="price" class="form-control" value=<?php echo $product['price'] ?>>
             </div>
             <div class="col-3">
                 <button type="submit" name="submit" class="btn btn-primary">Actualizando</button>
