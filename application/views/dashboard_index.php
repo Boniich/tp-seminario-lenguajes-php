@@ -45,29 +45,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
             <div>
+                <p>id: <?php echo $product['id']; ?> </p>
                 <p>Name: <?php echo $product['name']; ?> </p>
                 <p>Description: <?php echo $product['description']; ?></p>
                 <p>Price: <?php echo $product['price']; ?></p>
                 <a href="<?php echo base_url("update_form/{$product['id']}"); ?>">Actualizar Registro</a><br> <!--Funciona -->
                 <a href="<?php echo base_url("delete_product/{$product['id']}"); ?>">Eliminar Registro</a> <!--Funciona -->
-
-                <?php echo form_open('dashboard/update_product'); ?>
-                <h2>Update product #<?php echo $product['id']; ?></h2>
-                <div class="col-xl-6">
-                    <label for="inputEmail4" class="form-label">name</label>
-                    <input type="text" name="name" class="form-control" id="inputEmail4" value=<?php echo $product['name']; ?>>
-                </div>
-                <div class="col-md-6">
-                    <label for="inputPassword4" class="form-label">description</label>
-                    <input type="text" name="description" class="password" class="form-control" id="inputPassword4" value=<?php echo $product['description'] ?>>
-                </div>
-                <div class="col-md-6">
-                    <label for="inputPassword4" class="form-label">price</label>
-                    <input type="number" name="price" class="password" class="form-control" id="inputPassword4" value=<?php echo $product['price'] ?>>
-                </div>
-                <div class="col-3">
-                    <button type="submit" name="submit" class="btn btn-primary">Actualizando</button>
-                </div>
+                <br><br><br>
                 <?php echo form_close(); ?>
             </div>
         <?php endforeach; ?>
@@ -91,15 +75,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <button type="submit" name="submit" class="btn btn-primary">Sign in</button>
         </div>
         <?php echo form_close(); ?>
-
-
-        <!-- <h2>Delete product</h2>
-        <a href="<?php echo base_url('delete_product/3'); ?>">Eliminar Registro</a> -->
-        <!-- <form action="/delete_product/1" method="post">
-            <input type="hidden" name="_method" value="DELETE">
-            <button type="submit">Eliminar producto</button>
-        </form> -->
-
 </body>
 
 </html>
