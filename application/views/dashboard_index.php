@@ -48,6 +48,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <p>Name: <?php echo $product['name']; ?> </p>
                 <p>Description: <?php echo $product['description']; ?></p>
                 <p>Price: <?php echo $product['price']; ?></p>
+                <a href="<?php echo base_url("update_form/{$product['id']}"); ?>">Actualizar Registro</a><br> <!--Funciona -->
                 <a href="<?php echo base_url("delete_product/{$product['id']}"); ?>">Eliminar Registro</a> <!--Funciona -->
 
                 <?php echo form_open('dashboard/update_product'); ?>
