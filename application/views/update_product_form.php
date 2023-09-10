@@ -43,7 +43,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
         <?php foreach ($product as $product) : ?>
 
-            <?php echo form_open('dashboard/update_product'); ?>
+
+            <?php
+            $hidden = array('id' => $product['id']);
+            echo form_open("dashboard/update_product", '', $hidden); ?>
             <h2>Update product #<?php echo $product['id']; ?></h2>
             <div class="col-xl-6">
                 <label for="inputEmail4" class="form-label">name</label>

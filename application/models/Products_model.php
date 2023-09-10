@@ -35,9 +35,9 @@ class Products_model extends CI_Model
         return $product;
     }
 
-    public function update_one_product($data)
+    public function update_one_product($data, $id)
     {
-        $this->db->where('id', 5);
+        $this->db->where('id', $id);
         $this->db->update('products', $data);
     }
 }
