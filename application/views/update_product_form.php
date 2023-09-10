@@ -50,15 +50,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <h2>Update product #<?php echo $product['id']; ?></h2>
             <div class="col-xl-6">
                 <label for="inputEmail4" class="form-label">name</label>
-                <input type="text" name="name" class="form-control" id="inputEmail4" value=<?php echo $product['name']; ?>>
+                <input type="text" name="name" class="form-control" value="<?php echo $product['name']; ?>">
             </div>
             <div class="col-md-6">
                 <label for="inputPassword4" class="form-label">description</label>
-                <input type="text" name="description" class="password" class="form-control" id="inputPassword4" value=<?php echo $product['description'] ?>>
+                <input type="text" name="description" class="form-control" value="<?php echo $product['description'] ?>">
             </div>
             <div class="col-md-6">
                 <label for="inputPassword4" class="form-label">price</label>
-                <input type="number" name="price" class="password" class="form-control" id="inputPassword4" value=<?php echo $product['price'] ?>>
+                <input type="number" name="price" class="form-control" value=<?php echo $product['price'] ?>>
             </div>
             <div class="col-3">
                 <button type="submit" name="submit" class="btn btn-primary">Actualizando</button>
