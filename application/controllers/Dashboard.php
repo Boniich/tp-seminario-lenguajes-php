@@ -36,6 +36,12 @@ class Dashboard extends CI_Controller
     }
 
 
+    public function show_create_product_form()
+    {
+        $this->load->view('create_product_form');
+    }
+
+
     public function store_product()
     {
         $product = $this->take_product_data();
