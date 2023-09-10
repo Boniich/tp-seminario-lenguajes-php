@@ -15,7 +15,7 @@ class Dashboard extends CI_Controller
 
     public function index()
     {
-        $data['user'] = $this->user_model->get_user(); 
+        $data['user'] = $this->user_model->get_user();
         $data['products'] = $this->products_model->get_all_products();
 
         $this->load->view('dashboard_index', $data);
@@ -36,11 +36,29 @@ class Dashboard extends CI_Controller
     }
 
 
-    public function store_product(){
+    public function store_product()
+    {
         $product = $this->take_product_data();
 
-        if($product){
+        if ($product) {
             $this->products_model->store_new_product($product);
+            redirect('dashboard');
+        }
+    }
+
+    public function eliminar($id)
+    {
+        $this->products_model->eliminarProduct($id);
+        redirect('dashboard');
+    }
+
+    public function update_product()
+    {
+        $product = $this->take_product_data();
+
+        if ($product) {
+            $this->products_model->update_one_product($product);
+            redirect('dashboard');
         }
     }
 }
