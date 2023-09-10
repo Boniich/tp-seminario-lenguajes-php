@@ -52,5 +52,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $route['default_controller'] = 'login';
 $route['register'] = 'register';
 $route['dashboard'] = 'dashboard'; // para acceder debemos usar la siguiente URL http://localhost/seminarioLenguajesphp/index.php/dashboard
+$route['delete_product/(:num)'] = 'dashboard/eliminar/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+// $route->delete
