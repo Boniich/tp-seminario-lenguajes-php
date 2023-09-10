@@ -53,6 +53,7 @@ $route['default_controller'] = 'login';
 $route['register'] = 'register';
 $route['dashboard'] = 'dashboard'; // para acceder debemos usar la siguiente URL http://localhost/seminarioLenguajesphp/index.php/dashboard
 $route['delete_product/(:num)'] = 'dashboard/eliminar/$1';
+$route['update_form/(:num)'] = 'dashboard/get_update_form/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 // $route->delete

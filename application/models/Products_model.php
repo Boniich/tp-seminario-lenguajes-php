@@ -26,6 +26,15 @@ class Products_model extends CI_Model
         $this->db->delete('products');
     }
 
+    public function get_product_data_to_update($id)
+    {
+        $this->db->where('id', $id);
+        $query = $this->db->get('products');
+        $product = $query->result_array();
+
+        return $product;
+    }
+
     public function update_one_product($data)
     {
         $this->db->where('id', 5);

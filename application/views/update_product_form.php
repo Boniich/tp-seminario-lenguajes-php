@@ -30,7 +30,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <a class="nav-link" href="#">Sobre mi</a>
                         </li>
                         <li class="nav-item">
-                            <p class="nav-link" href="#">user email: <?php echo $user; ?></p>
+                            <!-- <p class="nav-link" href="#">user email: <?php echo $user; ?></p> -->
                         </li>
                     </ul>
                 </div>
@@ -41,40 +41,27 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <div class="container">
         <h1>This is the dashboard</h1>
 
-        <?php foreach ($products as $product) : ?>
+        <?php foreach ($product as $product) : ?>
 
-
-            <div>
-                <p>id: <?php echo $product['id']; ?> </p>
-                <p>Name: <?php echo $product['name']; ?> </p>
-                <p>Description: <?php echo $product['description']; ?></p>
-                <p>Price: <?php echo $product['price']; ?></p>
-                <a href="<?php echo base_url("update_form/{$product['id']}"); ?>">Actualizar Registro</a><br> <!--Funciona -->
-                <a href="<?php echo base_url("delete_product/{$product['id']}"); ?>">Eliminar Registro</a> <!--Funciona -->
-                <br><br><br>
-                <?php echo form_close(); ?>
+            <?php echo form_open('dashboard/update_product'); ?>
+            <h2>Update product #<?php echo $product['id']; ?></h2>
+            <div class="col-xl-6">
+                <label for="inputEmail4" class="form-label">name</label>
+                <input type="text" name="name" class="form-control" id="inputEmail4" value=<?php echo $product['name']; ?>>
             </div>
+            <div class="col-md-6">
+                <label for="inputPassword4" class="form-label">description</label>
+                <input type="text" name="description" class="password" class="form-control" id="inputPassword4" value=<?php echo $product['description'] ?>>
+            </div>
+            <div class="col-md-6">
+                <label for="inputPassword4" class="form-label">price</label>
+                <input type="number" name="price" class="password" class="form-control" id="inputPassword4" value=<?php echo $product['price'] ?>>
+            </div>
+            <div class="col-3">
+                <button type="submit" name="submit" class="btn btn-primary">Actualizando</button>
+            </div>
+            <?php echo form_close(); ?>
         <?php endforeach; ?>
-
-        <h2>Create product</h2>
-
-        <?php echo form_open('dashboard/store_product'); ?>
-        <div class="col-xl-6">
-            <label for="inputEmail4" class="form-label">name</label>
-            <input type="text" name="name" class="form-control" id="inputEmail4">
-        </div>
-        <div class="col-md-6">
-            <label for="inputPassword4" class="form-label">description</label>
-            <input type="text" name="description" class="password" class="form-control" id="inputPassword4">
-        </div>
-        <div class="col-md-6">
-            <label for="inputPassword4" class="form-label">price</label>
-            <input type="number" name="price" class="password" class="form-control" id="inputPassword4">
-        </div>
-        <div class="col-3">
-            <button type="submit" name="submit" class="btn btn-primary">Sign in</button>
-        </div>
-        <?php echo form_close(); ?>
 </body>
 
 </html>

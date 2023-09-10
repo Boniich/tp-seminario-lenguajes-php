@@ -61,4 +61,12 @@ class Dashboard extends CI_Controller
             redirect('dashboard');
         }
     }
+
+    public function get_update_form($id)
+    {
+
+        $data['product'] = $this->products_model->get_product_data_to_update($id);
+
+        $this->load->view('update_product_form', $data);
+    }
 }
