@@ -24,10 +24,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <a class="nav-link active" aria-current="page" href="<?php echo site_url("product"); ?>">Product</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="create_product_form">Shopping Car</a>
+                            <a class="nav-link" href="<?php echo site_url("shopping_car"); ?>">Shopping Car</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="create_product_form">Admin Panel</a>
+                            <a class="nav-link" href="<?php echo site_url("admin_panel"); ?>">Admin Panel</a>
                         </li>
                         <li class="nav-item">
                             <p class="nav-link" href="#">user: <?php echo $user; ?></p>
