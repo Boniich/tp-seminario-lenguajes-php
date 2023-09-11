@@ -12,9 +12,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Navbar</a>
+                <a class="navbar-brand" href="#">ICHI</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -30,7 +30,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <a class="nav-link" href="create_product_form">Admin Panel</a>
                         </li>
                         <li class="nav-item">
-                            <p class="nav-link" href="#">user email: <?php echo $user; ?></p>
+                            <p class="nav-link" href="#">user: <?php echo $user; ?></p>
                         </li>
                     </ul>
                 </div>
