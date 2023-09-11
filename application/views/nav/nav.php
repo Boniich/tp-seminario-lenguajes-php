@@ -21,10 +21,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="<?php echo site_url("dashboard"); ?>">Dashboard</a>
+                            <a class="nav-link active" aria-current="page" href="<?php echo site_url("product"); ?>">Product</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="create_product_form">Crear producto</a>
+                            <a class="nav-link" href="create_product_form">Shoppin Car</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="create_product_form">Admin Panel</a>
                         </li>
                         <li class="nav-item">
                             <p class="nav-link" href="#">user email: <?php echo $user; ?></p>
