@@ -13,37 +13,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 </head>
 
 <body>
-    <header>
-
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Navbar</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="dashboard">Dashboard</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="create_product_form">Crear producto</a>
-                        </li>
-                        <li class="nav-item">
-                            <p class="nav-link" href="#">user email: <?php echo $user; ?></p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-
     <div class="container">
         <h1>This is the dashboard</h1>
 
         <?php foreach ($products as $product) : ?>
-
-
             <div>
                 <p>id: <?php echo $product['id']; ?> </p>
                 <p>Name: <?php echo $product['name']; ?> </p>
