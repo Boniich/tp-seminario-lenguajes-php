@@ -16,18 +16,30 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <div class="container">
         <h1>Admin Panel</h1>
         <a class="btn btn-success" href="<?php echo site_url("create_product_form"); ?>">Create Product</a>
-        <?php foreach ($products as $product) : ?>
-            <div>
-                <p>id: <?php echo $product['id']; ?> </p>
-                <p>Name: <?php echo $product['name']; ?> </p>
-                <p>Description: <?php echo $product['description']; ?></p>
-                <p>Price: <?php echo $product['price']; ?></p>
-                <a href="<?php echo site_url("update_form/{$product['id']}"); ?>">Actualizar Registro</a><br>
-                <a href="<?php echo site_url("delete_product/{$product['id']}"); ?>">Eliminar Registro</a>
-                <br><br><br>
-                <?php echo form_close(); ?>
-            </div>
-        <?php endforeach; ?>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($products as $product) : ?>
+                    <tr>
+                        <th scope="row"><?php echo $product['id']; ?></th>
+                        <td><?php echo $product['name']; ?> </td>
+                        <td><?php echo $product['price']; ?></td>
+                        <td><a href="<?php echo site_url("update_form/{$product['id']}"); ?>">Actualizar Registro</a></td>
+                        <td><a href="<?php echo site_url("delete_product/{$product['id']}"); ?>">Eliminar Registro</a></td>
+                        <?php echo form_close(); ?>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
 
 
 </body>
