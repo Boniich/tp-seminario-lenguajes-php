@@ -13,20 +13,20 @@ class Products_model extends CI_Model
         return $result;
     }
 
-    public function store_new_product($data)
+    public function create_new_product($data)
     {
         $this->db->insert('products', $data);
 
         return true;
     }
 
-    public function eliminarProduct($id)
+    public function delete_one_product($id)
     {
         $this->db->where('id', $id);
         $this->db->delete('products');
     }
 
-    public function get_product_data_to_update($id)
+    public function show_product_data_to_update($id)
     {
         $this->db->where('id', $id);
         $query = $this->db->get('products');

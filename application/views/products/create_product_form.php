@@ -16,7 +16,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <div class="container">
         <h2>Create product</h2>
 
-        <?php echo form_open('dashboard/store_product'); ?>
+        <?php echo form_open('admin_panel/create_product'); ?>
         <div class="col-xl-6">
             <label for="inputEmail4" class="form-label">name</label>
             <input type="text" name="name" class="form-control" id="inputEmail4">
