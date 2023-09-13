@@ -16,7 +16,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <div class="container">
         <h2>Create product</h2>
 
-        <?php echo form_open('admin_panel/create_product'); ?>
+        <?php echo form_open_multipart('admin_panel/create_product'); ?>
         <div class="col-xl-6">
             <label for="inputEmail4" class="form-label">name</label>
             <input type="text" name="name" class="form-control" id="inputEmail4">
@@ -28,6 +28,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <div class="col-md-6">
             <label for="inputPassword4" class="form-label">price</label>
             <input type="number" name="price" class="password" class="form-control" id="inputPassword4">
+        </div>
+        <div class="col-xl-6">
+            <label for="inputEmail4" class="form-label">Image</label>
+            <input type="file" name="image" class="form-control" id="inputEmail4">
         </div>
         <div class="col-3">
             <button type="submit" name="submit" class="btn btn-primary">Crear producto</button>

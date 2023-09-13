@@ -76,12 +76,31 @@ class Admin_panel extends CI_Controller
         $productName = $this->input->post('name');
         $productDescrption = $this->input->post('description');
         $productPrice = $this->input->post('price');
+        $image = $this->do_upload();
 
         $productData = array(
             'name' => $productName,
             'description' => $productDescrption,
             'price' => $productPrice,
+            'image' => $image,
         );
         return $productData;
+    }
+
+    private function do_upload()
+    {
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = 'jpg|png';
+        $config['max_size'] = 200;
+        $config['max_width'] = 1024;
+        $config['max_height'] = 768;
+
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload('image')) {
+        } else {
+            $data = 'uploads/' . $this->upload->data('file_name');
+            return $data;
+        }
     }
 }
