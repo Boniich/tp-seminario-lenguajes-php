@@ -1,10 +1,11 @@
 use db_seminario_lenguajes_php;
-
-#drop table users;
-#drop table products;
-#drop table product_user;
-
 /*
+drop table product_user;
+drop table users;
+drop table products;
+
+
+
 CREATE TABLE users (
         id int NOT NULL AUTO_INCREMENT,
         full_name varchar(70) not null,
@@ -20,6 +21,7 @@ CREATE TABLE products (
         id int NOT NULL AUTO_INCREMENT,
         name varchar(70) NOT NULL,
         description varchar(150) NOT NULL,
+        image varchar(150) null,
         price double NOT NULL,
         PRIMARY KEY (id)
 );
@@ -36,7 +38,7 @@ CREATE TABLE product_user(
 /*
 INSERT INTO users (full_name,email, password)
 VALUES ("Ezequiel Bonino","ezequiel@gmail.com", "123456");
-*/
+
 ## products 
 INSERT INTO products (name, description, price)
 VALUES ("Telefono", "Este es un telefono",10.5);
@@ -49,7 +51,7 @@ VALUES (1, 1);
 
 INSERT INTO product_user (user_id, product_id)
 VALUES (1, 2);
-
+*/
 
 select * from users;
 select * from products;

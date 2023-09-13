@@ -20,7 +20,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <?php foreach ($products as $product) : ?>
                 <div class="col">
                     <div class="card" style="width: 18rem;">
-                        <img src="..." class="card-img-top" alt="...">
+                        <img src="<?php echo base_url($product['image']); ?>" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $product['name']; ?></h5>
                             <p class="card-text"><?php echo $product['description']; ?></p>
