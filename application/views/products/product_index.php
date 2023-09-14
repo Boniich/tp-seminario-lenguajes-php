@@ -14,11 +14,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 <body>
     <div class="container">
-        <h1>Your favorite products are here!</h1>
-
+        <div class="text-center my-5">
+            <h1>Welcome to Ecommerce Igniter 🔥</h1>
+            <h2>Your favorite products are here!</h2>
+        </div>
         <div class="row">
             <?php foreach ($products as $product) : ?>
-                <div class="col">
+                <div class="col mb-5">
                     <div class="card" style="width: 18rem;">
                         <img src="<?php echo base_url($product['image']); ?>" class="card-img-top" alt="...">
                         <div class="card-body">
