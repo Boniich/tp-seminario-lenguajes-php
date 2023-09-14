@@ -33,13 +33,14 @@ CREATE TABLE product_user(
     foreign key(user_id) references users(id),
     foreign key(product_id) references products(id)
 );
-*/
 
-/*
+
+
 INSERT INTO users (full_name,email, password)
 VALUES ("Ezequiel Bonino","ezequiel@gmail.com", "123456");
 
 ## products 
+
 INSERT INTO products (name, description, price)
 VALUES ("Telefono", "Este es un telefono",10.5);
 
