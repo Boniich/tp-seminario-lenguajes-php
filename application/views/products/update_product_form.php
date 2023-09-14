@@ -13,33 +13,32 @@ defined('BASEPATH') or exit('No direct script access allowed');
 </head>
 
 <body>
-    <div class="container">
-        <h1>This is the dashboard</h1>
-
-        <?php foreach ($product as $product) : ?>
-
-
-            <?php
-            $hidden = array('id' => $product['id']);
-            echo form_open("admin_panel/update_product", '', $hidden); ?>
-            <h2>Update product #<?php echo $product['id']; ?></h2>
-            <div class="col-xl-6">
-                <label for="inputEmail4" class="form-label">name</label>
-                <input type="text" name="name" class="form-control" value="<?php echo $product['name']; ?>">
-            </div>
-            <div class="col-md-6">
-                <label for="inputPassword4" class="form-label">description</label>
-                <input type="text" name="description" class="form-control" value="<?php echo $product['description'] ?>">
-            </div>
-            <div class="col-md-6">
-                <label for="inputPassword4" class="form-label">price</label>
-                <input type="number" name="price" class="form-control" value=<?php echo $product['price'] ?>>
-            </div>
-            <div class="col-3">
-                <button type="submit" name="submit" class="btn btn-primary">Actualizando</button>
-            </div>
-            <?php echo form_close(); ?>
-        <?php endforeach; ?>
+    <div class="container d-flex flex-column justify-content-center align-items-center">
+        <h1 class="my-5">Update Product</h1>
+        <div class="w-50 bg-light shadow p-3 mb-5 bg-body rounded border border-secondary rounded-3">
+            <?php foreach ($product as $product) : ?>
+                <?php
+                $hidden = array('id' => $product['id']);
+                echo form_open("admin_panel/update_product", '', $hidden); ?>
+                <div class="col">
+                    <label for="inputName4" class="form-label">Name</label>
+                    <input type="text" name="name" class="form-control" value="<?php echo $product['name']; ?>" id="inputName4">
+                </div>
+                <div class="col">
+                    <label for="inputDescription4" class="form-label">Description</label>
+                    <input type="text" name="description" class="form-control" value="<?php echo $product['description'] ?>" id="inputDescription4">
+                </div>
+                <div class="col">
+                    <label for="inputPrice4" class="form-label">Price</label>
+                    <input type="number" name="price" class="form-control" value=<?php echo $product['price'] ?> id="inputPrice4">
+                </div>
+                <div class="col-3 mt-4">
+                    <button type="submit" name="submit" class="btn btn-success">Update</button>
+                </div>
+                <?php echo form_close(); ?>
+            <?php endforeach; ?>
+        </div>
+    </div>
 </body>
 
 </html>
