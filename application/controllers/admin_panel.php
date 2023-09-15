@@ -57,6 +57,11 @@ class Admin_panel extends CI_Controller
         $this->load->view('admin/products_created_successfully_msg');
     }
 
+    public function show_successfully_updated_product(){
+        $this->add_nav_view();
+        $this->load->view('admin/product_updated_successfully_msg');
+    }
+
     public function show_update_form($id)
     {
 
@@ -72,7 +77,7 @@ class Admin_panel extends CI_Controller
 
         if ($product) {
             $this->products_model->update_one_product($product, $id);
-            redirect('admin_panel');
+            redirect('product_updated_successfully');
         }
     }
 
