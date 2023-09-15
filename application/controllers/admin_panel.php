@@ -18,10 +18,16 @@ class Admin_panel extends CI_Controller
     public function index()
     {
 
-        $this->data['products'] = $this->products_model->get_all_products();
 
         $this->add_nav_view();
         $this->load->view('admin/admin_index');
+        if ($this->products_model->there_is_products()) {
+            $this->data['products'] = $this->products_model->get_all_products();
+            $this->load->view('admin/show_products_table', $this->data);
+        } else {
+            $this->data['not_products_msg'] = 'There is not products to show! Create one!';
+            $this->load->view('products/not_product_msg', $this->data);
+        }
     }
 
     private function add_nav_view()

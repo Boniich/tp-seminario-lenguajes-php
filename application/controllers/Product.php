@@ -16,9 +16,14 @@ class Product extends CI_Controller
     public function index()
     {
         $data['user'] = $this->user_model->get_user();
-        $data['products'] = $this->products_model->get_all_products();
-
         $this->load->view('nav/nav', $data);
         $this->load->view('products/product_index');
+        if ($this->products_model->there_is_products()) {
+            $data['products'] = $this->products_model->get_all_products();
+            $this->load->view('products/show_products_list', $data);
+        } else {
+            $data['not_products_msg'] = 'There is not products to show! Please come back later!';
+            $this->load->view('products/not_product_msg', $data);
+        }
     }
 }

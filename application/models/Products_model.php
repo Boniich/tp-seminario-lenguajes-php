@@ -6,6 +6,13 @@ class Products_model extends CI_Model
         $this->load->database();
     }
 
+    public function there_is_products()
+    {
+        $query = $this->db->get('products');
+        $status = $query->num_rows() >= 1 ?? true ?? false;
+        return $status;
+    }
+
     public function get_all_products()
     {
         $query = $this->db->get('products');
