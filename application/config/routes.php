@@ -54,6 +54,7 @@ $route['register'] = 'register';
 $route['products'] = 'product';
 $route['admin_panel'] = 'admin_panel'; // para acceder debemos usar la siguiente URL http://localhost/seminarioLenguajesphp/index.php/dashboard
 $route['create_product_form'] = 'admin_panel/show_create_product_form';
+$route['product_created_successfully'] = 'admin_panel/show_successfully_action_msg';
 $route['delete_product/(:num)'] = 'admin_panel/delete_product/$1';
 $route['update_product/(:num)'] = 'admin_panel/update_product/$1';
 $route['update_form/(:num)'] = 'admin_panel/show_update_form/$1';
