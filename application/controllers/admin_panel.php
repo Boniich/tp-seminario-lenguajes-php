@@ -18,10 +18,16 @@ class Admin_panel extends CI_Controller
     public function index()
     {
 
-        $this->data['products'] = $this->products_model->get_all_products();
 
         $this->add_nav_view();
         $this->load->view('admin/admin_index');
+        if ($this->products_model->there_is_products()) {
+            $this->data['products'] = $this->products_model->get_all_products();
+            $this->load->view('admin/show_products_table', $this->data);
+        } else {
+            $this->data['not_products_msg'] = 'There is not products to show! Create one!';
+            $this->load->view('products/not_product_msg', $this->data);
+        }
     }
 
     private function add_nav_view()
@@ -41,8 +47,19 @@ class Admin_panel extends CI_Controller
 
         if ($product) {
             $this->products_model->create_new_product($product);
-            redirect('admin_panel');
+            redirect('product_created_successfully');
         }
+    }
+
+    public function show_successfully_action_msg()
+    {
+        $this->add_nav_view();
+        $this->load->view('admin/products_created_successfully_msg');
+    }
+
+    public function show_successfully_updated_product(){
+        $this->add_nav_view();
+        $this->load->view('admin/product_updated_successfully_msg');
     }
 
     public function show_update_form($id)
@@ -60,7 +77,7 @@ class Admin_panel extends CI_Controller
 
         if ($product) {
             $this->products_model->update_one_product($product, $id);
-            redirect('admin_panel');
+            redirect('product_updated_successfully');
         }
     }
 

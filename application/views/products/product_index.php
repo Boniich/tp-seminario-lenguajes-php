@@ -18,24 +18,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <h1>Welcome to Ecommerce Igniter 🔥</h1>
             <h2>Your favorite products are here!</h2>
         </div>
-        <div class="row">
-            <?php foreach ($products as $product) : ?>
-                <div class="col mb-5">
-                    <div class="card" style="width: 18rem;">
-                        <img src="<?php echo base_url($product['image']); ?>" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo $product['name']; ?></h5>
-                            <p class="card-text"><?php echo $product['description']; ?></p>
-                            <p class="card-text">$ <?php echo $product['price']; ?></p>
-                            <a href="#" class="btn btn-primary">Add to car</a>
-                        </div>
-                    </div>
-                </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
-
-
 </body>
 
 </html>

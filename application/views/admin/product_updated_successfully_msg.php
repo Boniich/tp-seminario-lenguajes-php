@@ -13,10 +13,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 </head>
 
 <body>
-    <div class="container">
-        <div class="my-5">
-            <h1 class="text-center">Admin Panel</h1>
-            <a class="btn btn-success" href="<?php echo site_url("create_product_form"); ?>">Create Product</a>
+    <div class="container d-flex flex-column justify-content-center align-items-center">
+        <div class="my-5 bg-success w-50 p-3 rounded ">
+            <h1 class="text-center text-light mb-4">Product updated successfully</h1>
+            <div class="d-flex justify-content-center align-items-center gap-3">
+            <td><a class="btn btn-warning" href="<?php echo site_url("admin_panel"); ?>">Go to Admin Panel</a></td>
+            <td><a class="btn btn-light" href="<?php echo site_url("products"); ?>">Go to products list</a></td>
+            </div>
         </div>
 </body>
 
