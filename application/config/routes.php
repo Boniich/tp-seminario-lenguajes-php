@@ -51,6 +51,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 */
 $route['default_controller'] = 'login';
 $route['register'] = 'register';
+$route['register_successfully'] = 'register/show_register_successfully_msg';
 $route['products'] = 'product';
 $route['admin_panel'] = 'admin_panel'; // para acceder debemos usar la siguiente URL http://localhost/seminarioLenguajesphp/index.php/dashboard
 $route['create_product_form'] = 'admin_panel/show_create_product_form';

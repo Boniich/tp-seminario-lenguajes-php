@@ -47,8 +47,12 @@ class Register extends CI_Controller
         $userData = $this->take_register_data();
         if ($userData) {
             if ($this->register_model->register($userData)) {
-                redirect('dashboard');
+                redirect('register_successfully');
             }
         }
+    }
+
+    public function show_register_successfully_msg(){
+        $this->load->view('auth/successfully_register');
     }
 }

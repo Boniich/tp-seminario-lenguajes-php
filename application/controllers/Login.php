@@ -24,7 +24,7 @@ class Login extends CI_Controller
         $password = $this->input->post('password');
 
         if ($this->login_model->login($email, $password)) {
-            redirect('dashboard');
+            redirect('products');
         } else {
             $data['error_message'] = 'Invalid username or password';
             $this->load->view('login_form', $data);
