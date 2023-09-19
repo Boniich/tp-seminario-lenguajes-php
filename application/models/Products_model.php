@@ -20,6 +20,13 @@ class Products_model extends CI_Model
         return $result;
     }
 
+    public function get_all_products_with_limit($limit, $page)
+    {
+        $query = $this->db->limit($limit, $page)->get('products');
+        $result = $query->result_array();
+        return $result;
+    }
+
     public function create_new_product($data)
     {
         $this->db->insert('products', $data);

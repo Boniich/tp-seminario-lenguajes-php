@@ -34,8 +34,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <?php echo form_close(); ?>
                 </tr>
             <?php endforeach; ?>
+
         </tbody>
     </table>
+    <div class="pagination-links">
+        <?php echo $links; ?>
+    </div>
     </div>
 </body>
 

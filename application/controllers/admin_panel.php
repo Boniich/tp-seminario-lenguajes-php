@@ -23,12 +23,18 @@ class Admin_panel extends CI_Controller
         $this->add_nav_view();
         $this->load->view('admin/admin_index');
         if ($this->products_model->there_is_products()) {
-            $config['base_url'] = 'http://localhost/tp-seminario-lenguajes-php/index.php/admin_panel/index/';
-            $config['total_rows'] = 200;
-            $config['per_page'] = 20;
+
+            $config['base_url'] = 'http://localhost/seminarioLenguajesphp/index.php/admin_panel/index/';
+            $config['total_rows'] = 16; //necesitamos metodo que cuente la cantidad de registros
+            $config['per_page'] = 10;
+            $config['uri_segment'] = 3;
             $this->pagination->initialize($config);
-            echo $this->pagination->create_links();
-            $this->data['products'] = $this->products_model->get_all_products();
+
+            // echo $this->pagination->create_links();
+            // $this->data['products'] = $this->products_model->get_all_products();
+            $page = ($this->uri->segment($config['uri_segment'])) ? $this->uri->segment($config['uri_segment']) : 0;
+            $this->data['products'] = $this->products_model->get_all_products_with_limit($config['per_page'], $page);
+            $this->data['links'] = $this->pagination->create_links();
             $this->load->view('admin/show_products_table', $this->data);
         } else {
             $this->data['not_products_msg'] = 'There is not products to show! Create one!';
@@ -63,7 +69,8 @@ class Admin_panel extends CI_Controller
         $this->load->view('admin/products_created_successfully_msg');
     }
 
-    public function show_successfully_updated_product(){
+    public function show_successfully_updated_product()
+    {
         $this->add_nav_view();
         $this->load->view('admin/product_updated_successfully_msg');
     }
