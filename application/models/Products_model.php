@@ -6,6 +6,11 @@ class Products_model extends CI_Model
         $this->load->database();
     }
 
+    public function count_products()
+    {
+        return $this->db->count_all_results('products');
+    }
+
     public function there_is_products()
     {
         $query = $this->db->get('products');
@@ -16,6 +21,13 @@ class Products_model extends CI_Model
     public function get_all_products()
     {
         $query = $this->db->get('products');
+        $result = $query->result_array();
+        return $result;
+    }
+
+    public function get_all_products_with_limit($limit, $page)
+    {
+        $query = $this->db->limit($limit, $page)->get('products');
         $result = $query->result_array();
         return $result;
     }
