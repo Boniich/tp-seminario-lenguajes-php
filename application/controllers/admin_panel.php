@@ -3,6 +3,10 @@
 class Admin_panel extends CI_Controller
 {
     private $data;
+    private int $per_page = 10;
+    private int $uri_segment = 3;
+    private string $base_url = 'http://localhost/seminarioLenguajesphp/index.php/admin_panel/index/';
+    private int $count_products = 0;
 
     public function __construct()
     {
@@ -18,28 +22,35 @@ class Admin_panel extends CI_Controller
 
     public function index()
     {
-
-
         $this->add_nav_view();
         $this->load->view('admin/admin_index');
         if ($this->products_model->there_is_products()) {
 
-            $config['base_url'] = 'http://localhost/seminarioLenguajesphp/index.php/admin_panel/index/';
-            $config['total_rows'] = 16; //necesitamos metodo que cuente la cantidad de registros
-            $config['per_page'] = 10;
-            $config['uri_segment'] = 3;
-            $this->pagination->initialize($config);
+            $this->count_products = $this->products_model->count_products();
+            $this->set_pagination_config();
+            $page = $this->get_uri_segment();
 
-            // echo $this->pagination->create_links();
-            // $this->data['products'] = $this->products_model->get_all_products();
-            $page = ($this->uri->segment($config['uri_segment'])) ? $this->uri->segment($config['uri_segment']) : 0;
-            $this->data['products'] = $this->products_model->get_all_products_with_limit($config['per_page'], $page);
+            $this->data['products'] = $this->products_model->get_all_products_with_limit($this->per_page, $page);
             $this->data['links'] = $this->pagination->create_links();
             $this->load->view('admin/show_products_table', $this->data);
         } else {
             $this->data['not_products_msg'] = 'There is not products to show! Create one!';
             $this->load->view('products/not_product_msg', $this->data);
         }
+    }
+
+    private function get_uri_segment()
+    {
+        return ($this->uri->segment($this->uri_segment)) ? $this->uri->segment($this->uri_segment) : 0;
+    }
+
+    private function set_pagination_config()
+    {
+        $config['base_url'] = $this->base_url;
+        $config['total_rows'] = $this->count_products;
+        $config['per_page'] = $this->per_page;
+        $config['uri_segment'] = $this->uri_segment;
+        $this->pagination->initialize($config);
     }
 
     private function add_nav_view()
