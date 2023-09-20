@@ -37,9 +37,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
         </tbody>
     </table>
-    <div class="pagination-links">
-        <?php echo $links; ?>
-    </div>
+    <!-- <div class="pagination-links"> -->
+    <?php echo $links; ?>
+    <!-- </div> -->
     </div>
 </body>
 
