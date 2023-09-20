@@ -6,6 +6,11 @@ class Products_model extends CI_Model
         $this->load->database();
     }
 
+    public function count_products()
+    {
+        return $this->db->count_all_results('products');
+    }
+
     public function there_is_products()
     {
         $query = $this->db->get('products');
