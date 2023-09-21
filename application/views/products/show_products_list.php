@@ -28,6 +28,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             </div>
         <?php endforeach; ?>
     </div>
+    <?php echo $links; ?>
     </div>
 </body>
 
