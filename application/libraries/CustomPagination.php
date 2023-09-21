@@ -70,13 +70,6 @@ class CustomPagination
         $this->CI->pagination->initialize($config);
     }
 
-    public function set_full_tags(string $css_class)
-    {
-        $config['full_tag_open'] = '<ul class="pagination">';
-        $config['full_tag_close'] = '</ul>';
-    }
-
-
     public function set_uri_segment(int $uri_segment)
     {
         $this->uri_segment = $uri_segment;
