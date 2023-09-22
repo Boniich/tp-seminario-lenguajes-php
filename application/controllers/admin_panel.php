@@ -117,13 +117,16 @@ class Admin_panel extends CI_Controller
 
         if (empty($_FILES['image']['name'])) {
             //read https://www.php.net/manual/en/function.copy.php
-            $image = 'uploads/not-image.png';
-            copy('./not-image.png', './uploads/new-image.png');
+            $image = time().'png';
+            $imageTocopy = './not-image.png';
+            $imageDest = './uploads/'.$image;
+            $newImage = 'uploads/'.$image;
+            copy($imageTocopy, $imageDest);
             $productData = array(
                 'name' => $productName,
                 'description' => $productDescrption,
                 'price' => $productPrice,
-                'image' => $image,
+                'image' => $newImage,
             );
         } else {
             $image = $this->do_upload();
