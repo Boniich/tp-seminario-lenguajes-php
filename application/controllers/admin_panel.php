@@ -5,7 +5,8 @@ class Admin_panel extends CI_Controller
     private $data;
     private int $per_page;
     private int $page;
-    private string $base_url = 'http://localhost/seminarioLenguajesphp/index.php/admin_panel/index/';
+    // private string $base_url = 'http://localhost/seminarioLenguajesphp/index.php/admin_panel/index/'; // casa
+    private string $base_url = 'http://localhost/tp-seminario-Lenguajes-php/index.php/admin_panel/index/'; // uni
     private int $count_products = 0;
 
     public function __construct()

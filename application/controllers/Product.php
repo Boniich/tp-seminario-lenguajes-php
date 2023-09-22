@@ -6,7 +6,8 @@ class Product extends CI_Controller
 
     private int $per_page;
     private int $page;
-    private string $base_url = 'http://localhost/seminarioLenguajesphp/index.php/product/index/';
+    // private string $base_url = 'http://localhost/seminarioLenguajesphp/index.php/product/index/'; // casa
+    private string $base_url = 'http://localhost/tp-seminario-Lenguajes-php/index.php/product/index/'; // uni
     private int $count_products = 0;
 
     public function __construct()
