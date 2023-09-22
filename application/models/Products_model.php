@@ -54,6 +54,18 @@ class Products_model extends CI_Model
         return $product;
     }
 
+    public function get_image_to_manipulate($id)
+    {
+        $this->db->where('id', $id);
+        $query = $this->db->get('products');
+
+        $row = $query->row();
+
+        $image = $row->image;
+
+        return './' . $image;
+    }
+
     public function update_one_product($data, $id)
     {
         $this->db->where('id', $id);

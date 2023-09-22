@@ -16,6 +16,7 @@ class Admin_panel extends CI_Controller
         $this->load->helper('url_helper');
         $this->load->model('products_model');
         $this->load->model('user_model');
+        $this->load->helper('file');
 
         $this->data['user'] = $this->user_model->get_user();
         $this->custompagination->set_base_url($this->base_url);
@@ -58,7 +59,7 @@ class Admin_panel extends CI_Controller
 
     public function create_product()
     {
-        $product = $this->take_product_data();
+        $product = $this->take_data_to_create_product();
 
         if ($product) {
             $this->products_model->create_new_product($product);
@@ -89,7 +90,7 @@ class Admin_panel extends CI_Controller
     public function update_product()
     {
         $id = $this->input->post('id');
-        $product = $this->take_product_data();
+        $product = $this->take_product_data_to_update();
 
         if ($product) {
             $this->products_model->update_one_product($product, $id);
@@ -99,26 +100,132 @@ class Admin_panel extends CI_Controller
 
     public function delete_product($id)
     {
+        $image = $this->products_model->get_image_to_manipulate($id);
+
+        if (file_exists($image)) {
+            unlink($image);
+        }
         $this->products_model->delete_one_product($id);
         redirect('admin_panel');
     }
 
-
-    private function take_product_data()
+    private function take_data_to_create_product()
     {
         $productName = $this->input->post('name');
         $productDescrption = $this->input->post('description');
         $productPrice = $this->input->post('price');
-        $image = $this->do_upload();
 
-        $productData = array(
-            'name' => $productName,
-            'description' => $productDescrption,
-            'price' => $productPrice,
-            'image' => $image,
-        );
+        if (empty($_FILES['image']['name'])) {
+            //read https://www.php.net/manual/en/function.copy.php
+            $image = time().'.png';
+            $imageTocopy = './not-image.png';
+            $imageDest = './uploads/'.$image;
+            $newImage = 'uploads/'.$image;
+            copy($imageTocopy, $imageDest);
+            $productData = array(
+                'name' => $productName,
+                'description' => $productDescrption,
+                'price' => $productPrice,
+                'image' => $newImage,
+            );
+        } else {
+            $image = $this->do_upload();
+            $productData = array(
+                'name' => $productName,
+                'description' => $productDescrption,
+                'price' => $productPrice,
+                'image' => $image,
+            );
+        }
         return $productData;
     }
+
+
+
+    private function take_product_data_to_update()
+    {
+        $productName = $this->input->post('name');
+        $productDescrption = $this->input->post('description');
+        $productPrice = $this->input->post('price');
+
+        if (empty($_FILES['image']['name'])) {
+            $productData = array(
+                'name' => $productName,
+                'description' => $productDescrption,
+                'price' => $productPrice,
+            );
+        } else {
+            $image = $this->do_upload();
+            $productData = array(
+                'name' => $productName,
+                'description' => $productDescrption,
+                'price' => $productPrice,
+                'image' => $image,
+            );
+        }
+        return $productData;
+    }
+
+
+    // private function take_product_data(string $type_action = 'create')
+    // {
+    //     $productName = $this->input->post('name');
+    //     $productDescrption = $this->input->post('description');
+    //     $productPrice = $this->input->post('price');
+
+    //     if (empty($_FILES['image']['name'])) {
+
+    //         if ($type_action == 'create') {
+    //             $image = 'uploads/not-image.png';
+    //             $productData = array(
+    //                 'name' => $productName,
+    //                 'description' => $productDescrption,
+    //                 'price' => $productPrice,
+    //                 'image' => $image,
+    //             );
+    //         } else {
+    //             $productData = array(
+    //                 'name' => $productName,
+    //                 'description' => $productDescrption,
+    //                 'price' => $productPrice,
+    //             );
+    //         }
+    //     } else {
+    //         $image = $this->do_upload();
+    //         $productData = array(
+    //             'name' => $productName,
+    //             'description' => $productDescrption,
+    //             'price' => $productPrice,
+    //             'image' => $image,
+    //         );
+    //     }
+    //     return $productData;
+    // }
+
+
+    // private function take_product_data()
+    // {
+    //     $productName = $this->input->post('name');
+    //     $productDescrption = $this->input->post('description');
+    //     $productPrice = $this->input->post('price');
+
+    //     if (empty($_FILES['image']['name'])) {
+    //         $productData = array(
+    //             'name' => $productName,
+    //             'description' => $productDescrption,
+    //             'price' => $productPrice,
+    //         );
+    //     } else {
+    //         $image = $this->do_upload();
+    //         $productData = array(
+    //             'name' => $productName,
+    //             'description' => $productDescrption,
+    //             'price' => $productPrice,
+    //             'image' => $image,
+    //         );
+    //     }
+    //     return $productData;
+    // }
 
     private function do_upload()
     {
@@ -131,6 +238,8 @@ class Admin_panel extends CI_Controller
         $this->load->library('upload', $config);
 
         if (!$this->upload->do_upload('image')) {
+            redirect('admin_panel');
+            // devuelve error si la imagen no coincide con la config
         } else {
             $data = 'uploads/' . $this->upload->data('file_name');
             return $data;
