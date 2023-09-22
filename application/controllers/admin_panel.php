@@ -59,7 +59,7 @@ class Admin_panel extends CI_Controller
 
     public function create_product()
     {
-        $product = $this->take_product_data();
+        $product = $this->take_data_to_create_product();
 
         if ($product) {
             $this->products_model->create_new_product($product);
@@ -90,7 +90,7 @@ class Admin_panel extends CI_Controller
     public function update_product()
     {
         $id = $this->input->post('id');
-        $product = $this->take_product_data();
+        $product = $this->take_product_data_to_update();
 
         if ($product) {
             $this->products_model->update_one_product($product, $id);
@@ -109,8 +109,36 @@ class Admin_panel extends CI_Controller
         redirect('admin_panel');
     }
 
+    private function take_data_to_create_product()
+    {
+        $productName = $this->input->post('name');
+        $productDescrption = $this->input->post('description');
+        $productPrice = $this->input->post('price');
 
-    private function take_product_data()
+        if (empty($_FILES['image']['name'])) {
+            //read https://www.php.net/manual/en/function.copy.php
+            $image = 'uploads/not-image.png';
+            $productData = array(
+                'name' => $productName,
+                'description' => $productDescrption,
+                'price' => $productPrice,
+                'image' => $image,
+            );
+        } else {
+            $image = $this->do_upload();
+            $productData = array(
+                'name' => $productName,
+                'description' => $productDescrption,
+                'price' => $productPrice,
+                'image' => $image,
+            );
+        }
+        return $productData;
+    }
+
+
+
+    private function take_product_data_to_update()
     {
         $productName = $this->input->post('name');
         $productDescrption = $this->input->post('description');
@@ -133,6 +161,67 @@ class Admin_panel extends CI_Controller
         }
         return $productData;
     }
+
+
+    // private function take_product_data(string $type_action = 'create')
+    // {
+    //     $productName = $this->input->post('name');
+    //     $productDescrption = $this->input->post('description');
+    //     $productPrice = $this->input->post('price');
+
+    //     if (empty($_FILES['image']['name'])) {
+
+    //         if ($type_action == 'create') {
+    //             $image = 'uploads/not-image.png';
+    //             $productData = array(
+    //                 'name' => $productName,
+    //                 'description' => $productDescrption,
+    //                 'price' => $productPrice,
+    //                 'image' => $image,
+    //             );
+    //         } else {
+    //             $productData = array(
+    //                 'name' => $productName,
+    //                 'description' => $productDescrption,
+    //                 'price' => $productPrice,
+    //             );
+    //         }
+    //     } else {
+    //         $image = $this->do_upload();
+    //         $productData = array(
+    //             'name' => $productName,
+    //             'description' => $productDescrption,
+    //             'price' => $productPrice,
+    //             'image' => $image,
+    //         );
+    //     }
+    //     return $productData;
+    // }
+
+
+    // private function take_product_data()
+    // {
+    //     $productName = $this->input->post('name');
+    //     $productDescrption = $this->input->post('description');
+    //     $productPrice = $this->input->post('price');
+
+    //     if (empty($_FILES['image']['name'])) {
+    //         $productData = array(
+    //             'name' => $productName,
+    //             'description' => $productDescrption,
+    //             'price' => $productPrice,
+    //         );
+    //     } else {
+    //         $image = $this->do_upload();
+    //         $productData = array(
+    //             'name' => $productName,
+    //             'description' => $productDescrption,
+    //             'price' => $productPrice,
+    //             'image' => $image,
+    //         );
+    //     }
+    //     return $productData;
+    // }
 
     private function do_upload()
     {
