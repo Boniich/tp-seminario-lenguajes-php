@@ -16,6 +16,7 @@ class Admin_panel extends CI_Controller
         $this->load->helper('url_helper');
         $this->load->model('products_model');
         $this->load->model('user_model');
+        $this->load->helper('file');
 
         $this->data['user'] = $this->user_model->get_user();
         $this->custompagination->set_base_url($this->base_url);
@@ -99,6 +100,11 @@ class Admin_panel extends CI_Controller
 
     public function delete_product($id)
     {
+        $image = $this->products_model->get_image_to_manipulate($id);
+
+        if (file_exists($image)) {
+            unlink($image);
+        }
         $this->products_model->delete_one_product($id);
         redirect('admin_panel');
     }
