@@ -19,7 +19,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <?php foreach ($product as $product) : ?>
                 <?php
                 $hidden = array('id' => $product['id']);
-                echo form_open("admin_panel/update_product", '', $hidden); ?>
+                echo form_open_multipart("admin_panel/update_product", '', $hidden); ?>
                 <div class="col">
                     <label for="inputName4" class="form-label">Name</label>
                     <input type="text" name="name" class="form-control" value="<?php echo $product['name']; ?>" id="inputName4">
@@ -31,6 +31,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <div class="col">
                     <label for="inputPrice4" class="form-label">Price</label>
                     <input type="number" name="price" class="form-control" value=<?php echo $product['price'] ?> id="inputPrice4">
+                </div>
+                <div class="col">
+                    <label for="inputEmail4" class="form-label">Image</label>
+                    <input type="file" name="image" class="form-control" id="inputEmail4">
                 </div>
                 <div class="col-3 mt-4">
                     <button type="submit" name="submit" class="btn btn-success">Update</button>
