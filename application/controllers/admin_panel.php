@@ -117,7 +117,7 @@ class Admin_panel extends CI_Controller
 
         if (empty($_FILES['image']['name'])) {
             //read https://www.php.net/manual/en/function.copy.php
-            $image = time().'png';
+            $image = time().'.png';
             $imageTocopy = './not-image.png';
             $imageDest = './uploads/'.$image;
             $newImage = 'uploads/'.$image;
