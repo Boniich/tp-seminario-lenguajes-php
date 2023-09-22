@@ -115,14 +115,22 @@ class Admin_panel extends CI_Controller
         $productName = $this->input->post('name');
         $productDescrption = $this->input->post('description');
         $productPrice = $this->input->post('price');
-        $image = $this->do_upload();
 
-        $productData = array(
-            'name' => $productName,
-            'description' => $productDescrption,
-            'price' => $productPrice,
-            'image' => $image,
-        );
+        if (empty($_FILES['image']['name'])) {
+            $productData = array(
+                'name' => $productName,
+                'description' => $productDescrption,
+                'price' => $productPrice,
+            );
+        } else {
+            $image = $this->do_upload();
+            $productData = array(
+                'name' => $productName,
+                'description' => $productDescrption,
+                'price' => $productPrice,
+                'image' => $image,
+            );
+        }
         return $productData;
     }
 
@@ -137,6 +145,8 @@ class Admin_panel extends CI_Controller
         $this->load->library('upload', $config);
 
         if (!$this->upload->do_upload('image')) {
+            redirect('admin_panel');
+            // devuelve error si la imagen no coincide con la config
         } else {
             $data = 'uploads/' . $this->upload->data('file_name');
             return $data;
