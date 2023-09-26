@@ -6,8 +6,8 @@ class Product extends CI_Controller
 
     private int $per_page;
     private int $page;
-    // private string $base_url = 'http://localhost/seminarioLenguajesphp/index.php/product/index/'; // casa
-    private string $base_url = 'http://localhost/tp-seminario-Lenguajes-php/index.php/product/index/'; // uni
+    private string $base_url = 'http://localhost/seminarioLenguajesphp/index.php/product/index/'; // casa
+    // private string $base_url = 'http://localhost/tp-seminario-Lenguajes-php/index.php/product/index/'; // uni
     private int $count_products = 0;
 
     public function __construct()
@@ -18,12 +18,17 @@ class Product extends CI_Controller
         $this->load->helper('url_helper');
         $this->load->model('products_model');
         $this->load->model('user_model');
+        $this->load->library('session');
 
         $this->custompagination->set_base_url($this->base_url);
     }
 
     public function index()
     {
+        if (!$this->session->userdata('user_id')) {
+            redirect('login');
+        }
+
         $data['user'] = $this->user_model->get_user();
         $this->load->view('nav/nav', $data);
         $this->load->view('products/product_index');
