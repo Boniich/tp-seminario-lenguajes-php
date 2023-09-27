@@ -28,7 +28,11 @@ class Product extends CI_Controller
     {
 
         $id = $this->session->user_id;
-        printf($id);
+
+        if (!isset($id)) {
+            redirect('login');
+        }
+
         $this->data['user'] = $this->user_model->get_user($id);
         $this->load->view('nav/nav', $this->data);
         $this->load->view('products/product_index');
