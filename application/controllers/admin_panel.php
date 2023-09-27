@@ -20,16 +20,14 @@ class Admin_panel extends CI_Controller
         $this->load->helper('file');
         $this->load->library('session');
 
+        $this->run_auth_middleware();
+        $this->get_user_data();
 
         $this->custompagination->set_base_url($this->base_url);
     }
 
     public function index()
     {
-
-        // if (!$this->session->userdata('user_id')) {
-        //     redirect('login');
-        // }
 
         $this->add_nav_view();
         $this->load->view('admin/admin_index');
@@ -45,6 +43,21 @@ class Admin_panel extends CI_Controller
         }
     }
 
+    private function run_auth_middleware()
+    {
+        $id = $this->session->user_id;
+        if (!isset($id)) {
+            redirect('login');
+        }
+    }
+
+    private function get_user_data()
+    {
+        $id = $this->session->user_id;
+        $this->data['user'] = $this->user_model->get_user($id);
+    }
+
+
     private function initiate_pagination()
     {
         $this->count_products = $this->products_model->count_products();
@@ -53,15 +66,8 @@ class Admin_panel extends CI_Controller
         $this->page = $this->custompagination->get_uri_segment();
     }
 
-    private function get_user_data($id)
-    {
-        return $this->data['user'] = $this->user_model->get_user($id);
-    }
-
     private function add_nav_view()
     {
-        $ID = $this->session->user_id;
-        $this->data['user'] = $this->user_model->get_user($ID);
         $this->load->view('nav/nav', $this->data);
     }
 
@@ -179,67 +185,6 @@ class Admin_panel extends CI_Controller
         }
         return $productData;
     }
-
-
-    // private function take_product_data(string $type_action = 'create')
-    // {
-    //     $productName = $this->input->post('name');
-    //     $productDescrption = $this->input->post('description');
-    //     $productPrice = $this->input->post('price');
-
-    //     if (empty($_FILES['image']['name'])) {
-
-    //         if ($type_action == 'create') {
-    //             $image = 'uploads/not-image.png';
-    //             $productData = array(
-    //                 'name' => $productName,
-    //                 'description' => $productDescrption,
-    //                 'price' => $productPrice,
-    //                 'image' => $image,
-    //             );
-    //         } else {
-    //             $productData = array(
-    //                 'name' => $productName,
-    //                 'description' => $productDescrption,
-    //                 'price' => $productPrice,
-    //             );
-    //         }
-    //     } else {
-    //         $image = $this->do_upload();
-    //         $productData = array(
-    //             'name' => $productName,
-    //             'description' => $productDescrption,
-    //             'price' => $productPrice,
-    //             'image' => $image,
-    //         );
-    //     }
-    //     return $productData;
-    // }
-
-
-    // private function take_product_data()
-    // {
-    //     $productName = $this->input->post('name');
-    //     $productDescrption = $this->input->post('description');
-    //     $productPrice = $this->input->post('price');
-
-    //     if (empty($_FILES['image']['name'])) {
-    //         $productData = array(
-    //             'name' => $productName,
-    //             'description' => $productDescrption,
-    //             'price' => $productPrice,
-    //         );
-    //     } else {
-    //         $image = $this->do_upload();
-    //         $productData = array(
-    //             'name' => $productName,
-    //             'description' => $productDescrption,
-    //             'price' => $productPrice,
-    //             'image' => $image,
-    //         );
-    //     }
-    //     return $productData;
-    // }
 
     private function do_upload()
     {
