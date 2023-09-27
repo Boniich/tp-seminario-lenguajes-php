@@ -6,9 +6,9 @@ class User_model extends CI_Model
         $this->load->database();
     }
 
-    public function get_user()
+    public function get_user($id)
     {
-        $this->db->where('id', 1);
+        $this->db->where('id', $id);
         $query = $this->db->get('users');
 
         $row = $query->row();
