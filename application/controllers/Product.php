@@ -21,19 +21,29 @@ class Product extends CI_Controller
         $this->load->model('user_model');
         $this->load->library('session');
 
+        $this->run_auth_middleware();
+        $this->get_user_data();
+
         $this->custompagination->set_base_url($this->base_url);
+    }
+
+    private function run_auth_middleware()
+    {
+        $id = $this->session->user_id;
+        if (!isset($id)) {
+            redirect('login');
+        }
+    }
+
+    private function get_user_data()
+    {
+        $id = $this->session->user_id;
+        $this->data['user'] = $this->user_model->get_user($id);
     }
 
     public function index()
     {
 
-        $id = $this->session->user_id;
-
-        if (!isset($id)) {
-            redirect('login');
-        }
-
-        $this->data['user'] = $this->user_model->get_user($id);
         $this->load->view('nav/nav', $this->data);
         $this->load->view('products/product_index');
         if ($this->products_model->there_is_products()) {
