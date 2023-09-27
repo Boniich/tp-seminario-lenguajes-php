@@ -17,7 +17,7 @@ class Login extends CI_Controller
     public function index()
     {
 
-        if ($this->session->userdata('user_id')) {
+        if (isset($this->session->user_id)) {
             redirect('products');
         }
 
