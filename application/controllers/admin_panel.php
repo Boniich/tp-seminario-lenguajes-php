@@ -5,8 +5,8 @@ class Admin_panel extends CI_Controller
     private $data;
     private int $per_page;
     private int $page;
-    // private string $base_url = 'http://localhost/seminarioLenguajesphp/index.php/admin_panel/index/'; // casa
-    private string $base_url = 'http://localhost/tp-seminario-Lenguajes-php/index.php/admin_panel/index/'; // uni
+    private string $base_url = 'http://[::1]/seminarioLenguajesphp/index.php/admin_panel/index/'; // casa
+    // private string $base_url = 'http://localhost/tp-seminario-Lenguajes-php/index.php/admin_panel/index/'; // uni
     private int $count_products = 0;
 
     public function __construct()
@@ -18,13 +18,19 @@ class Admin_panel extends CI_Controller
         $this->load->model('products_model');
         $this->load->model('user_model');
         $this->load->helper('file');
+        $this->load->library('session');
 
-        $this->data['user'] = $this->user_model->get_user();
+
         $this->custompagination->set_base_url($this->base_url);
     }
 
     public function index()
     {
+
+        // if (!$this->session->userdata('user_id')) {
+        //     redirect('login');
+        // }
+
         $this->add_nav_view();
         $this->load->view('admin/admin_index');
         if ($this->products_model->there_is_products()) {
@@ -47,8 +53,15 @@ class Admin_panel extends CI_Controller
         $this->page = $this->custompagination->get_uri_segment();
     }
 
+    private function get_user_data($id)
+    {
+        return $this->data['user'] = $this->user_model->get_user($id);
+    }
+
     private function add_nav_view()
     {
+        $ID = $this->session->user_id;
+        $this->data['user'] = $this->user_model->get_user($ID);
         $this->load->view('nav/nav', $this->data);
     }
 
@@ -118,10 +131,10 @@ class Admin_panel extends CI_Controller
 
         if (empty($_FILES['image']['name'])) {
             //read https://www.php.net/manual/en/function.copy.php
-            $image = time().'.png';
+            $image = time() . '.png';
             $imageTocopy = './not-image.png';
-            $imageDest = './uploads/'.$image;
-            $newImage = 'uploads/'.$image;
+            $imageDest = './uploads/' . $image;
+            $newImage = 'uploads/' . $image;
             copy($imageTocopy, $imageDest);
             $productData = array(
                 'name' => $productName,

@@ -4,9 +4,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Product extends CI_Controller
 {
 
+    private $data;
     private int $per_page;
     private int $page;
-    private string $base_url = 'http://localhost/seminarioLenguajesphp/index.php/product/index/'; // casa
+    private string $base_url = 'http://[::1]/seminarioLenguajesphp/index.php/product/index/'; // casa
     // private string $base_url = 'http://localhost/tp-seminario-Lenguajes-php/index.php/product/index/'; // uni
     private int $count_products = 0;
 
@@ -25,21 +26,20 @@ class Product extends CI_Controller
 
     public function index()
     {
-        if (!$this->session->userdata('user_id')) {
-            redirect('login');
-        }
 
-        $data['user'] = $this->user_model->get_user();
-        $this->load->view('nav/nav', $data);
+        $id = $this->session->user_id;
+        printf($id);
+        $this->data['user'] = $this->user_model->get_user($id);
+        $this->load->view('nav/nav', $this->data);
         $this->load->view('products/product_index');
         if ($this->products_model->there_is_products()) {
             $this->initiate_pagination();
-            $data['products'] = $this->products_model->get_all_products_with_limit($this->per_page, $this->page);
-            $data['links'] = $this->custompagination->get_links();
-            $this->load->view('products/show_products_list', $data);
+            $this->data['products'] = $this->products_model->get_all_products_with_limit($this->per_page, $this->page);
+            $this->data['links'] = $this->custompagination->get_links();
+            $this->load->view('products/show_products_list', $this->data);
         } else {
-            $data['not_products_msg'] = 'There is not products to show! Please come back later!';
-            $this->load->view('products/not_product_msg', $data);
+            $this->data['not_products_msg'] = 'There is not products to show! Please come back later!';
+            $this->load->view('products/not_product_msg', $this->data);
         }
     }
 
