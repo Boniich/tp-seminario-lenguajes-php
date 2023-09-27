@@ -32,6 +32,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <li class="nav-item">
                             <p class="nav-link" href="#">user: <?php echo $user; ?></p>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo site_url("logout"); ?>">Logout</a>
+                        </li>
                     </ul>
                 </div>
             </div>
