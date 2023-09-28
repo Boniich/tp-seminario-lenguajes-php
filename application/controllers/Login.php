@@ -16,16 +16,14 @@ class Login extends CI_Controller
 
     public function index()
     {
-
-        if (isset($this->session->user_id)) {
-            redirect('products');
-        }
-
+        $this->run_auth_middleware();
         $this->load->view('login_form');
     }
 
     public function do_login()
     {
+
+        $this->run_auth_middleware();
 
         $email = $this->input->post('email');
         $password = $this->input->post('password');
@@ -44,5 +42,12 @@ class Login extends CI_Controller
     {
         $this->session->unset_userdata('user_id');
         redirect('login');
+    }
+
+    private function run_auth_middleware()
+    {
+        if (isset($this->session->user_id)) {
+            redirect('products');
+        }
     }
 }
