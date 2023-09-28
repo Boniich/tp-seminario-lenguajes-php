@@ -12,14 +12,14 @@ class Register extends CI_Controller
         $this->load->helper('url_helper');
         $this->load->model('register_model');
         $this->load->library('session');
+
+        if ($this->session->user_id) {
+            redirect('product');
+        }
     }
 
     public function index()
     {
-        if ($this->session->user_id) {
-            redirect('product');
-        }
-
         $this->load->view('register_index');
     }
 
