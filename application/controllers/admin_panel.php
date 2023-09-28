@@ -5,8 +5,8 @@ class Admin_panel extends CI_Controller
     private $data;
     private int $per_page;
     private int $page;
-    // private string $base_url = 'http://localhost/seminarioLenguajesphp/index.php/admin_panel/index/'; // casa
-    private string $base_url = 'http://localhost/tp-seminario-Lenguajes-php/index.php/admin_panel/index/'; // uni
+    private string $base_url = 'http://[::1]/seminarioLenguajesphp/index.php/admin_panel/index/'; // casa
+    // private string $base_url = 'http://localhost/tp-seminario-Lenguajes-php/index.php/admin_panel/index/'; // uni
     private int $count_products = 0;
 
     public function __construct()
@@ -18,13 +18,17 @@ class Admin_panel extends CI_Controller
         $this->load->model('products_model');
         $this->load->model('user_model');
         $this->load->helper('file');
+        $this->load->library('session');
 
-        $this->data['user'] = $this->user_model->get_user();
+        $this->run_auth_middleware();
+        $this->get_user_data();
+
         $this->custompagination->set_base_url($this->base_url);
     }
 
     public function index()
     {
+
         $this->add_nav_view();
         $this->load->view('admin/admin_index');
         if ($this->products_model->there_is_products()) {
@@ -38,6 +42,21 @@ class Admin_panel extends CI_Controller
             $this->load->view('products/not_product_msg', $this->data);
         }
     }
+
+    private function run_auth_middleware()
+    {
+        $id = $this->session->user_id;
+        if (!isset($id)) {
+            redirect('login');
+        }
+    }
+
+    private function get_user_data()
+    {
+        $id = $this->session->user_id;
+        $this->data['user'] = $this->user_model->get_user($id);
+    }
+
 
     private function initiate_pagination()
     {
@@ -118,10 +137,10 @@ class Admin_panel extends CI_Controller
 
         if (empty($_FILES['image']['name'])) {
             //read https://www.php.net/manual/en/function.copy.php
-            $image = time().'.png';
+            $image = time() . '.png';
             $imageTocopy = './not-image.png';
-            $imageDest = './uploads/'.$image;
-            $newImage = 'uploads/'.$image;
+            $imageDest = './uploads/' . $image;
+            $newImage = 'uploads/' . $image;
             copy($imageTocopy, $imageDest);
             $productData = array(
                 'name' => $productName,
@@ -166,67 +185,6 @@ class Admin_panel extends CI_Controller
         }
         return $productData;
     }
-
-
-    // private function take_product_data(string $type_action = 'create')
-    // {
-    //     $productName = $this->input->post('name');
-    //     $productDescrption = $this->input->post('description');
-    //     $productPrice = $this->input->post('price');
-
-    //     if (empty($_FILES['image']['name'])) {
-
-    //         if ($type_action == 'create') {
-    //             $image = 'uploads/not-image.png';
-    //             $productData = array(
-    //                 'name' => $productName,
-    //                 'description' => $productDescrption,
-    //                 'price' => $productPrice,
-    //                 'image' => $image,
-    //             );
-    //         } else {
-    //             $productData = array(
-    //                 'name' => $productName,
-    //                 'description' => $productDescrption,
-    //                 'price' => $productPrice,
-    //             );
-    //         }
-    //     } else {
-    //         $image = $this->do_upload();
-    //         $productData = array(
-    //             'name' => $productName,
-    //             'description' => $productDescrption,
-    //             'price' => $productPrice,
-    //             'image' => $image,
-    //         );
-    //     }
-    //     return $productData;
-    // }
-
-
-    // private function take_product_data()
-    // {
-    //     $productName = $this->input->post('name');
-    //     $productDescrption = $this->input->post('description');
-    //     $productPrice = $this->input->post('price');
-
-    //     if (empty($_FILES['image']['name'])) {
-    //         $productData = array(
-    //             'name' => $productName,
-    //             'description' => $productDescrption,
-    //             'price' => $productPrice,
-    //         );
-    //     } else {
-    //         $image = $this->do_upload();
-    //         $productData = array(
-    //             'name' => $productName,
-    //             'description' => $productDescrption,
-    //             'price' => $productPrice,
-    //             'image' => $image,
-    //         );
-    //     }
-    //     return $productData;
-    // }
 
     private function do_upload()
     {

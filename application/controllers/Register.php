@@ -11,6 +11,11 @@ class Register extends CI_Controller
         $this->load->helper('form');
         $this->load->helper('url_helper');
         $this->load->model('register_model');
+        $this->load->library('session');
+
+        if ($this->session->user_id) {
+            redirect('product');
+        }
     }
 
     public function index()
@@ -52,7 +57,8 @@ class Register extends CI_Controller
         }
     }
 
-    public function show_register_successfully_msg(){
+    public function show_register_successfully_msg()
+    {
         $this->load->view('auth/successfully_register');
     }
 }
