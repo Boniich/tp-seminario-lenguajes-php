@@ -30,7 +30,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <td><?php echo $product['name']; ?> </td>
                     <td><?php echo $product['price']; ?></td>
                     <td><a href="<?php echo site_url("update_form/{$product['id']}"); ?>">Actualizar Registro</a></td>
-                    <td><a href="<?php echo site_url("delete_product/{$product['id']}"); ?>">Eliminar Registro</a></td>
+                    <td><a href="#" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteProduct" data-id="<?php echo $product['id']; ?>">
+                            Delete
+                        </a></td>
                     <?php echo form_close(); ?>
                 </tr>
             <?php endforeach; ?>
@@ -39,6 +41,35 @@ defined('BASEPATH') or exit('No direct script access allowed');
     </table>
     <?php echo $links; ?>
     </div>
+    <div class="modal" id="deleteProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure want to delete this product?
+                </div>
+                <div class="modal-footer">
+                    <!-- <?php print_r($id); ?> -->
+                    <a type="button" class="btn btn-danger" href="#" id="eliminarProducto">Delete</a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
+
+<script>
+    var modal = document.getElementById('deleteProduct');
+    var deleteProduct = document.getElementById('eliminarProducto');
+    modal.addEventListener('show.bs.modal', function(event) {
+        var button = event.relatedTarget
+        let id = button.getAttribute('data-id');
+        let newURL = '<?php echo site_url('admin_panel/delete_product/'); ?>' + id;
+        deleteProduct.setAttribute('href', newURL);
+    });
+</script>
